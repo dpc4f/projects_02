@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wand Tranh - Note Application For Lumia ð Phone</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            padding: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 250px;
+            font-size: 17px;
+            max-width: 420px;
+            margin: auto;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px;
+            font-size: 17px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <h2>White Notes</h2>
+
+    <textarea id="note"></textarea>
+    <br>
+
+    <button onclick="saveNote()">Save</button>
+    <button onclick="exportTEX()">Export TEX</button>
+    <button onclick="clearNote()">Clear</button>
+
+    <script>
+
+        function saveNote() {
+            var text = document.getElementById("note").value;
+            localStorage.setItem("my_note", text);
+            alert("Saved into local storage successfully");
+        }
+
+        function loadNote() {
+            var text = localStorage.getItem("my_note");
+            if (text) {
+                document.getElementById("note").value = text;
+            }
+        }
+
+        function clearNote() {
+            localStorage.removeItem("my_note");
+            document.getElementById("note").value = "";
+        }
+
+        function exportTEX() {
+
+            var text = document.getElementById("note").value;
+
+            var blob = new Blob([text], { type: "text/plain" });
+            var link = document.createElement("a");
+
+            link.href = URL.createObjectURL(blob);
+            link.download = "note.tex";
+
+            document.body.appendChild(link);
+            link.click();
+
+            document.body.removeChild(link);
+        }
+
+        window.onload = loadNote;
+
+    </script>
+
+</body>
+
+</html>
