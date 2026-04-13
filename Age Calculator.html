@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            width: 300px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #764ba2;
+        }
+        #result {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Age Calculator</h1>
+        <input type="date" id="birthDate" placeholder="Select your birth date">
+        <button onclick="calculateAge()">Calculate Age</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+            /*
+M9 27 current_year-38
+thang M9 co' 30 ngay; thang M3 co' 31 ngay ..
+3 ngay cua thang M9
+gia su them 30 ngay cua thang M3
+--> 3 ngay thang M9 && 30 ngay thang M3
+--> .1 thang M9 && 0.9+0.067741935483871 thang M3
+--> 1 thang && { 0.067741935483871 thang M3 = 2.1 ngay }
+
+
+*/
+
+            const monthNames_2 = [
+                "M11", "M12", "M1", "M2", "M3", "M4",
+                "M5", "M6", "M7", "M8", "M9", "M10"
+            ];
+
+
+            
+
+
+        function calculateAge() {
+            const birthDate = document.getElementById('birthDate').value;
+            const resultDiv = document.getElementById('result');
+
+            if (!birthDate) {
+                resultDiv.textContent = 'Please select a birth date';
+                return;
+            }
+
+
+
+            const today = new Date();
+            const birth = new Date(birthDate);
+            // let age = today.getFullYear() - birth.getFullYear();
+            // const monthDiff = today.getMonth() - birth.getMonth();
+            let dayDiff = Math.floor((today.getTime() - birth.getTime()) / (1000 * 60 * 60 * 24));
+
+
+            // if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+            //     age--;
+            // }
+
+            resultDiv.textContent = `You are ${dayDiff.toLocaleString()} days old`;
+        }
+    </script>
+
+
+</body>
+</html>
+
+
+
