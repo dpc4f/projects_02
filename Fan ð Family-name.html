@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Phan / Phạm Independent</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #111;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+
+        #name {
+            font-size: 64px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            width: 500px; /* your added constraint */
+        }
+
+        .dot {
+            display: inline-block;
+            width: 0.6ch; /* reserve space */
+            text-align: center;
+            margin-left: -6px;
+        }
+
+        .tail {
+            display: inline-block;
+            width: 1ch;
+            margin-left: -15px;
+        }
+
+        .last-char {
+            display: inline-block;
+            margin-left: 12px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="name">
+    { Fan, Ph<span id="a">a</span><span class="dot" id="dot"></span><span class="tail" id="tail">n</span> <span class="last-char">}</span> 
+</div>
+
+<script>
+    const dotEl = document.getElementById("dot");
+    const tailEl = document.getElementById("tail");
+
+    let dotOn = false;
+    let isM = false;
+
+    // Dot accent (̣) toggles every 500ms
+    setInterval(() => {
+        dotOn = !dotOn;
+        dotEl.textContent = dotOn ? "\u0323" : ""; // combining dot below
+    }, 2200);
+
+    // n <-> m toggles every 800ms (different rhythm)
+    setInterval(() => {
+        isM = !isM;
+        tailEl.textContent = isM ? "m" : "n";
+    }, 1500);
+</script>
+
+</body>
+</html>
